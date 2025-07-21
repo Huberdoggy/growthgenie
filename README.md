@@ -1,0 +1,33 @@
+# 🧞‍♂️ GrowthGenie
+
+**A personality-powered prompt tuning engine** — built to help AI solutions strategists generate calibrated, on-brand outputs using behavioral resonance, not brute force.
+
+> _This project is active. Architecture, logic, and strategy are unfolding in public._
+
+---
+
+### 📁 Project Structure
+
+This repo uses a modular layout — all code and documentation live in the [`/growthgenie`](./growthgenie/) directory to maintain project hygiene and prepare for future extensions (e.g. `/tests`, `/docs`, `/ui`).
+
+---
+
+### 👇 Start Here
+
+Looking for screenshots, a Loom demo, or the full prompt scaffolding?
+
+Head directly into [`growthgenie/`](./growthgenie/), where you'll find:
+
+- 📸 Cleanly styled `README.md`
+- 🧠 Configurable GPT scaffolds
+- 🔄 Toggle-based API protection logic
+- 🖼️ Visuals and walkthrough
+
+---
+
+### 🛠️ Dev Notes
+
+This project is built in Replit using Python 3.11 and a secure `.env` pattern.  
+`.gitignore` and `.replit` are managed from the repo root.
+
+---

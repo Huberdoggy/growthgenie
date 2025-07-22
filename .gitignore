@@ -5,6 +5,7 @@
 .pythonlibs
 uv.lock
 pyproject.toml
+reminders.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

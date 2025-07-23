@@ -14,5 +14,5 @@ def generate_prompt(base_prompt: str,
                     external_mode: bool = False) -> str:
     persona = load_persona(persona_id)
     tuned_prompt = apply_trait_modifiers(base_prompt, persona["traits"],
-                                         external_mode)
+        external_mode)
     return tuned_prompt

@@ -1,0 +1,10 @@
+{
+  "name": "Kyle",
+  "age": 33,
+  "profession": "AI Solutions Strategist",
+  "traits": {
+    "witty": 0.8,
+    "curious": 0.9,
+    "precise": 0.6
+  }
+}

@@ -3,11 +3,16 @@ from prompt_logic import run_growthgenie, generate_prompt
 
 if EXTERNAL_MODE:
     print("🌐 External Mode Active — Safe demo version")
-else:
-    print("🔧 Internal Mode — Full functionality enabled")
     # Tests...
     run_growthgenie()
-    test_persona = generate_prompt("Look at my traits!", "kyle".title(),
+    test_persona = generate_prompt("Look at my traits (mock publicly concientious - return stub).", "Kyle",
+                                   EXTERNAL_MODE)
+    print(test_persona)
+else:
+    print("🔧 Internal Mode — Full functionality enabled")
+    # Alternative tests...
+    run_growthgenie()
+    test_persona = generate_prompt("Look at my traits!", "Kyle",
                                    EXTERNAL_MODE)
     print(test_persona)
 

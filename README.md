@@ -31,3 +31,11 @@ This project is built in Replit using Python 3.11 and a secure `.env` pattern.
 `.gitignore` and `.replit` are managed from the repo root.
 
 ---
+
+### 👤 Authorship and Use
+
+GrowthGenie is an original work created by [Kyle Huber](https://linkedin.com/in/kyle-james-my-filenames) as part of an ongoing project exploring human-personality-driven prompt tuning.
+
+While this repository is public for transparency, learning, and recruiter visibility, all design logic and behavioral systems are authored by Kyle and remain under active development. Contributions are not currently being accepted.
+
+Please respect the intellectual ownership of this project. If referencing or forking, attribution is appreciated.

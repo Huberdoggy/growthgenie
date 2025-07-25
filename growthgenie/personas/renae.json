@@ -1,0 +1,10 @@
+{
+  "name": "Renae",
+  "age": 60,
+  "profession": "Retired",
+  "traits": {
+    "empathetic": 0.9 ,
+    "precise": 0.9,
+    "analytical": 0.8
+  }
+}

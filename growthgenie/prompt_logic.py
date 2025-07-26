@@ -6,9 +6,8 @@ def run_growthgenie():
     print("🤖 GrowthGenie is initializing...")
 
 
-# Begin prompt logic and persona config
-def generate_prompt(base_prompt: str, persona_id: str, external_mode: bool = False) -> str:
+def generate_prompt(base_prompt, persona_id, external_mode=False, traits_override=None):
     persona = load_persona(persona_id)
-    tuned_prompt = apply_trait_modifiers(base_prompt, persona.traits, external_mode)
-    return tuned_prompt
+    traits = traits_override if traits_override is not None else persona.traits # See related comment in demo_ui
+    return apply_trait_modifiers(base_prompt, traits, external_mode)
 

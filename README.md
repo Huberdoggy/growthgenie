@@ -28,7 +28,7 @@ Head directly into [`growthgenie/`](./growthgenie/), where you'll find:
 ### 🛠️ Dev Notes
 
 This project is built in Replit using Python 3.11 and a secure `.env` pattern.  
-`.gitignore` and `.replit` are managed from the repo root.
+`.gitignore`, `requirements.txt`, and `.replit` are managed from the repo root.
 
 ---
 

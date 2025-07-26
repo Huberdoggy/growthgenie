@@ -1,8 +1,10 @@
-entrypoint = "growthgenie/main.py"
+entrypoint = "growthgenie/demo_ui.py"
+run = "streamlit run growthgenie/demo_ui.py"
 modules = ["python-3.11"]
 
 [nix]
 channel = "stable-24_05"
+packages = ["arrow-cpp", "cacert", "cargo", "freetype", "glibcLocales", "lcms2", "libiconv", "libimagequant", "libjpeg", "libtiff", "libwebp", "libxcrypt", "openjpeg", "pkg-config", "rustc", "tcl", "tk", "zlib"]
 
 [unitTest]
 language = "python3"
@@ -13,3 +15,7 @@ requiredFiles = [".replit", "replit.nix"]
 [deployment]
 run = ["python3", "main.py"]
 deploymentTarget = "cloudrun"
+
+[[ports]]
+localPort = 8501
+externalPort = 80

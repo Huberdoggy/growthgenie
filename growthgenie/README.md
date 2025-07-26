@@ -5,8 +5,20 @@ GrowthGenie is a personality-powered prompt calibration tool designed for AI sol
 ## Getting Started
 
 1. Clone repo or open in Replit
-2. Copy `.env.example` to `.env` and populate your OpenAI key
-3. Toggle `EXTERNAL_MODE` in `settings.py` as needed
-4. Run `main.py` to start
+2. Install dependencies:
+   - If you're in the **repo root**, run:
+     ```bash
+     pip install -r requirements.txt
+     ```
+   - If you're inside the nested `/growthgenie` folder, run:
+     ```bash
+     pip install -r ../requirements.txt
+     ```
+4. Copy `.env.example` to `.env` and populate your OpenAI key
+5. Optional: Set `EXTERNAL_MODE = True` in `settings.py` to suppress personality overlays for public-facing output.
+6. To launch the web interface, run:
+   ```bash
+   streamlit run demo_ui.py
+*(If using Replit, click the green Run button.)*
 
 This is a layered build. See commit notes or comments for each phase.

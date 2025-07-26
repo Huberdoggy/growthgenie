@@ -1,3 +1,8 @@
+# Constants
+THRESHOLD = 0.7 # Trait application threshold
+# Traits that are acceptable for public/external mode
+PUBLIC_SAFE_TRAITS = {"analytical", "precise"}
+
 """
 This module applies trait-based transformations to a base prompt.
 Each trait acts as a modular filter, layered in order of descending intensity.
@@ -34,12 +39,10 @@ def apply_trait_modifiers(base_prompt: str, traits: dict, external_mode: bool) -
 
     # Sort traits by strength (highest weight first)
     sorted_traits = sorted(traits.items(), key=lambda item: item[1], reverse=True)
-    # Traits that are acceptable for public/external mode
-    public_safe_traits = {"analytical", "precise"} 
 
     for trait, weight in sorted_traits:
-        if weight > 0.7:
-            if external_mode and trait not in public_safe_traits:
+        if weight >= THRESHOLD:
+            if external_mode and trait not in PUBLIC_SAFE_TRAITS:
                 continue  # Skip all layered behavior for public mode
 
             # Check for modifier traits

@@ -4,6 +4,18 @@ from persona_loader import load_persona
 from explanation_builder import build_trait_explanation
 from trait_modifiers import THRESHOLD, PUBLIC_SAFE_TRAITS
 
+persona_metadata = {
+    "Kyle": {
+        "emoji": "🦑",
+        "bio": "Sharp-tongued but sincere, Kyle weaves logic with wit. He’s your go-to when clarity meets curiosity."
+    },
+    "Renae": {
+        "emoji": "🧑‍🔬",
+        "bio": "Analytical yet warm, Renae sees nuance where others rush. She blends precision with empathy."
+    }
+}
+
+
 # --- UI Header ---
 st.title("🧞 GrowthGenie")
 st.caption("Shape the voice of your AI with personality traits. No prompt engineering required.")
@@ -13,6 +25,27 @@ user_prompt = st.text_area("💬 Enter your base prompt:", value="Explain how LL
 
 # --- Persona Selection ---
 persona_id = st.selectbox("🎭 Choose a persona:", options=["Kyle", "Renae"])
+# --- Persona Preview ---
+meta = persona_metadata.get(persona_id)
+if meta:
+    st.markdown(
+        f"""
+        <div style="
+            background-color: #2a2a2e;
+            padding: 10px 16px;
+            border-left: 5px solid #007acc;
+            border-radius: 8px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 15px;
+        ">
+        <strong>{meta['emoji']} {persona_id}</strong><br>
+        <em>{meta['bio']}</em>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
 
 # --- Trait Slider Preview ---
 st.subheader("🎛️ Trait Tuning (0–10)")
@@ -21,17 +54,49 @@ all_traits = ["witty", "curious", "precise", "empathetic", "analytical", "direct
 # --- Mode Toggle ---
 external_mode = st.checkbox("External Mode (Public-safe output)", value=False)
 
+PRESETS = {
+    "Atlas Mode": {"curious": 0.9, "analytical": 0.9, "witty": 0.8},
+    "Make It More Human": {"empathetic": 0.9, "witty": 0.8},
+    "Brand Voice Booster": {"imaginative": 0.9, "precise": 0.8}
+}
+
+st.subheader("🧑‍🎓 Guided Mode Presets")
+selected_preset = st.selectbox(
+    "Choose a preset to auto-fill trait sliders:", ["None"] + list(PRESETS.keys())
+)
+
+
+# Handle preset injection
+if selected_preset != "None":
+    # First clear all sliders
+    for t in all_traits:
+        st.session_state[t] = 0
+
+    # Then apply preset values
+    for t, v in PRESETS[selected_preset].items():
+        st.session_state[t] = int(v * 10)  # scale to 0–10 slider range
+
+
 trait_inputs = {}
 for trait in all_traits:
     if external_mode and trait not in PUBLIC_SAFE_TRAITS:
         continue  # Skip non-public traits when in external mode
-    trait_inputs[trait] = st.slider(trait.title(), 0, 10, 0)
+    trait_inputs[trait] = st.slider(
+        trait.title(), 0, 10, 0, key=trait  # key allows programmatic control via st.session_state
+    )
+    
+# Normalize slider values to 0.0–1.0
+normalized_traits = {trait: value / 10 for trait, value in trait_inputs.items()}
+nonzero_count = sum(1 for val in normalized_traits.values() if val > 0)
+
+# Control generate button state -> 3 traits for 3 'wishes', so to speak...
+generate_disabled = nonzero_count > 3
+if generate_disabled:
+    st.caption("⚠️ Limit: Please select no more than 3 traits per persona.")
 
 # --- Generate Button ---
-if st.button("✨ Generate"):
-    # Normalize slider values to 0.0–1.0
-    normalized_traits = {trait: value / 10 for trait, value in trait_inputs.items()}
-
+if st.button("✨ Generate", disabled=generate_disabled):
+    
     # Load persona for reference (could be shown later)
     persona = load_persona(persona_id)
 
@@ -51,9 +116,10 @@ if st.button("✨ Generate"):
     st.markdown(
         f"""
         <div style="
-            background-color: black;
+            background-color: #2a2a2e;
             padding: 12px 16px;
-            border-radius: 12px;
+            border-left: 5px solid #007acc;
+            border-radius: 8px;
             margin-bottom: 10px;
             max-width: 90%;
             word-wrap: break-word;

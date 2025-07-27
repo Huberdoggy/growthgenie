@@ -7,13 +7,13 @@ def build_trait_explanation(applied_traits: dict) -> str:
   if not top:
       return "No strong personality traits were emphasized in this response."
     
-  # Currently, only using the 2 'explanations' for PUBLIC_SAFE_TRAITS
+  # Currently, only using these 3 'explanations' for PUBLIC_SAFE_TRAITS
   phrases = {
       "analytical": "I emphasized logic and structured insight",
-      "precise": "I clarified language and trimmed ambiguity"
-      #"empathetic": "I softened the tone to be more compassionate",
+      "empathetic": "I softened the tone to be more compassionate",
+      "curious": "I expressed open-ended thinking"
+      #"precise": "I clarified language and trimmed ambiguity"
       #"witty": "I added a playful twist",
-      #"curious": "I expressed open-ended thinking",
       #"direct": "I delivered with confidence and brevity"
   }
 

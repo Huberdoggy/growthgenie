@@ -1,7 +1,7 @@
 # Constants
 THRESHOLD = 0.7 # Trait application threshold
 # Traits that are acceptable for public/external mode
-PUBLIC_SAFE_TRAITS = {"analytical", "precise"}
+PUBLIC_SAFE_TRAITS = {"analytical", "curious", "empathetic"}
 
 """
 This module applies trait-based transformations to a base prompt.
@@ -19,8 +19,9 @@ trait_fragment_map = {
 }
 
 # Traits that modify the full prompt directly
+# For now, removing all references of 'precise', as it serves little purpose
 trait_modifier_map = {
-    "precise": lambda prompt: prompt.strip()
+   # "precise": lambda prompt: prompt.strip()
 }
 
 def apply_trait_modifiers(base_prompt: str, traits: dict, external_mode: bool) -> str:

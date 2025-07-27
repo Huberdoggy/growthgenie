@@ -7,11 +7,11 @@ from trait_modifiers import THRESHOLD, PUBLIC_SAFE_TRAITS
 persona_metadata = {
     "Kyle": {
         "emoji": "🦑",
-        "bio": "Sharp-tongued but sincere, Kyle weaves logic with wit. He’s your go-to when clarity meets curiosity."
+        "bio": "Sharp-tongued but sincere, Kyle weaves logic with humor. He’s your go-to when clarity meets curiosity."
     },
     "Renae": {
         "emoji": "🧑‍🔬",
-        "bio": "Analytical yet warm, Renae sees nuance where others rush. She blends precision with empathy."
+        "bio": "Analytical yet warm, Renae sees nuance where others rush."
     }
 }
 
@@ -49,7 +49,7 @@ if meta:
 
 # --- Trait Slider Preview ---
 st.subheader("🎛️ Trait Tuning (0–10)")
-all_traits = ["witty", "curious", "precise", "empathetic", "analytical", "direct", "imaginative"]
+all_traits = ["witty", "curious", "empathetic", "analytical", "direct", "imaginative"] # Removed 'precise'
 
 # --- Mode Toggle ---
 external_mode = st.checkbox("External Mode (Public-safe output)", value=False)
@@ -57,12 +57,29 @@ external_mode = st.checkbox("External Mode (Public-safe output)", value=False)
 PRESETS = {
     "Atlas Mode": {"curious": 0.9, "analytical": 0.9, "witty": 0.8},
     "Make It More Human": {"empathetic": 0.9, "witty": 0.8},
-    "Brand Voice Booster": {"imaginative": 0.9, "precise": 0.8}
+    "Brand Voice Booster": {"imaginative": 0.9, "direct": 0.8},
+    "The Conversational Researcher": {"curious": 0.8, "empathetic": 0.6, "analytical": 0.5}
 }
 
 st.subheader("🧑‍🎓 Guided Mode Presets")
+
+# Filter presets based on mode
+if external_mode:
+    safe_presets = ["The Conversational Researcher"]
+else:
+    safe_presets = list(PRESETS.keys())
+
+# Conveniently reset all sliders to zero
+if st.button("Reset Traits"):
+    st.session_state["selected_preset"] = "None"
+    for t in all_traits:
+        st.session_state[t] = 0
+
+# 'safe_presets' will either contain only public-mode preset, or all others
 selected_preset = st.selectbox(
-    "Choose a preset to auto-fill trait sliders:", ["None"] + list(PRESETS.keys())
+    "Choose a preset to auto-fill trait sliders:",
+    ["None"] + safe_presets,
+    key="selected_preset"
 )
 
 

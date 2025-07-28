@@ -21,8 +21,7 @@ Head directly into [`growthgenie/`](./growthgenie/), where you'll find:
 - 📸 Cleanly styled `README.md`
 - 🧠 Configurable GPT scaffolds
 - 🔄 Toggle-based API protection logic
-- 🖼️ Visuals and walkthrough
-
+  
 ---
 
 ### 🛠️ Dev Notes

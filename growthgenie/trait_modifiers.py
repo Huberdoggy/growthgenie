@@ -1,6 +1,9 @@
 #from settings import THRESHOLD, PUBLIC_SAFE_TRAITS
 
 """
+THIS MODULE IS NOT USED IN THE CURRENT VERSION OF THE APP
+Kept for reference and potential future use.
+
 This module applies trait-based transformations to a base prompt.
 Each trait acts as a modular filter, layered in order of descending intensity.
 """

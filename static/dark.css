@@ -1,0 +1,79 @@
+body, .stApp {
+    background-color: #1e1e22;
+    color: #e0e0e0;
+}
+
+.prompt-block,
+.persona-block,
+.trait-sliders,
+.output-section {
+    background-color: #2a2a2e;
+    border: 1px solid #444;
+}
+
+.output-bubble {
+    background-color: #2f2f33;
+    border-left: 4px solid #00c7b7;
+}
+
+.trait-summary {
+    background-color: #292929;
+    border-left-color: #00c7b7;
+}
+
+/* ================================
+   Universal Styling Base
+   ================================ */
+body, .stApp {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.output-bubble {
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin: 12px 0;
+    font-style: italic;
+    max-width: 90%;
+    word-wrap: break-word;
+}
+
+.trait-summary {
+    margin-top: 10px;
+    padding: 10px 16px;
+    border-left: 5px solid #aaa;
+    border-radius: 6px;
+    font-size: 14px;
+    font-style: italic;
+    max-width: 85%;
+}
+
+.header-block {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.prompt-block,
+.persona-block,
+.trait-sliders,
+.output-section {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding: 16px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Genie header image wrapper (optional if customizing) */
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}

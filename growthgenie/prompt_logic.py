@@ -1,13 +1,17 @@
+from settings import PUBLIC_SAFE_TRAITS
 from persona_loader import load_persona
-from trait_modifiers import apply_trait_modifiers
+from system_prompts_private import get_base_system_prompt
 
-
-def run_growthgenie():
-    print("🤖 GrowthGenie is initializing...")
-
-
+ 
 def generate_prompt(base_prompt, persona_id, external_mode=False, traits_override=None):
     persona = load_persona(persona_id)
-    traits = traits_override if traits_override is not None else persona.traits # See related comment in demo_ui
-    return apply_trait_modifiers(base_prompt, traits, external_mode)
+    traits = traits_override if traits_override is not None else persona.traits
+
+    # External mode trait sanitization
+    if external_mode:
+        traits = {t: v for t, v in traits.items() if t in PUBLIC_SAFE_TRAITS}
+
+    system_prompt = get_base_system_prompt(traits)
+
+    return base_prompt, system_prompt # Tuple, to be unpacked in demo_ui
 

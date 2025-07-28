@@ -1,4 +1,4 @@
-from trait_modifiers import THRESHOLD
+from settings import THRESHOLD
 
 def build_trait_explanation(applied_traits: dict) -> str:
   sorted_traits = sorted(applied_traits.items(), key=lambda x: x[1], reverse=True)
@@ -7,14 +7,13 @@ def build_trait_explanation(applied_traits: dict) -> str:
   if not top:
       return "No strong personality traits were emphasized in this response."
     
-  # Currently, only using these 3 'explanations' for PUBLIC_SAFE_TRAITS
   phrases = {
       "analytical": "I emphasized logic and structured insight",
       "empathetic": "I softened the tone to be more compassionate",
-      "curious": "I expressed open-ended thinking"
-      #"precise": "I clarified language and trimmed ambiguity"
-      #"witty": "I added a playful twist",
-      #"direct": "I delivered with confidence and brevity"
+      "curious": "I expressed open-ended thinking",
+      "precise": "I clarified language and trimmed ambiguity",
+      "witty": "I added a playful twist",
+      "direct": "I delivered with confidence and brevity"
   }
 
   reasons = [phrases.get(trait, f"I adjusted for {trait}") for trait in top]

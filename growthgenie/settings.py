@@ -1,11 +1,6 @@
-import os
+# Constants
+THRESHOLD = 0.7 # Trait application threshold
+# Traits that are acceptable for public/external mode
+PUBLIC_SAFE_TRAITS = {"analytical", "curious", "empathetic"}
 
-# Mode toggles
-EXTERNAL_MODE = False  # Manually toggle for internal vs. public demo
 
-USE_API = os.getenv(
-    "USE_OPENAI",
-    "false").lower() == "true"  #  If .env returns None - will default to False
-
-# Keys
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")

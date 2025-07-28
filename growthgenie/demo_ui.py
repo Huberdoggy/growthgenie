@@ -1,8 +1,16 @@
+import os
 import streamlit as st
+from dotenv import load_dotenv
+from openai import OpenAI
 from prompt_logic import generate_prompt
 from persona_loader import load_persona
-from explanation_builder import build_trait_explanation
-from trait_modifiers import THRESHOLD, PUBLIC_SAFE_TRAITS
+from settings import THRESHOLD, PUBLIC_SAFE_TRAITS
+
+load_dotenv()
+# Get the API key from .env
+# The OpenAI Python library automatically looks for OPENAI_API_KEY
+# but you can explicitly retrieve it if needed for other purposes
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
 persona_metadata = {
     "Kyle": {
@@ -120,40 +128,77 @@ if st.button("✨ Generate", disabled=generate_disabled):
     # Generate tuned prompt. Use persona traits unless user has adjusted sliders
     traits_to_use = normalized_traits if any(normalized_traits.values()) else None
 
-    tuned_prompt = generate_prompt(
+    user_prompt, system_prompt = generate_prompt(
         user_prompt,
         persona_id,
         external_mode=external_mode,
         traits_override=traits_to_use
     )
-
+    
     # --- Output Section ---
     st.markdown("#### 🔮 GrowthGenie Output")
-    st.caption("Here’s how your tuned AI responded:")
-    st.markdown(
-        f"""
-        <div style="
-            background-color: #2a2a2e;
-            padding: 12px 16px;
-            border-left: 5px solid #007acc;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            max-width: 90%;
-            word-wrap: break-word;
-        ">
-            <strong>💬 You asked:</strong><br><em>{user_prompt}</em>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
     
+    with st.chat_message("assistant"):
+        client = OpenAI()
+        response = client.chat.completions.create(
+            model="gpt-4",  # or "gpt-3.5-turbo"
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ],
+            temperature=0.7
+        )
+        
+        assistant_reply = response.choices[0].message.content
+        
+        st.markdown(
+            f"""
+            <div style="
+                background-color: #1c1c1f;
+                padding: 12px 16px;
+                border-radius: 8px;
+                margin-bottom: 6px;
+                max-width: 90%;
+                word-wrap: break-word;
+                color: #ffffff;
+                font-style: italic;
+                font-size: 1rem;
+                border-left: 4px solid #4a4a4d;
+            ">
+            <strong>💬 You:</strong> {user_prompt}
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        st.markdown(
+            f"""
+            <div style="
+                background-color: #2a2a2e;
+                padding: 16px 18px;
+                border-radius: 14px;
+                margin-bottom: 16px;
+                max-width: 90%;
+                word-wrap: break-word;
+                box-shadow: 0px 2px 6px rgba(0,0,0,0.3);
+                border: 1px solid #3d3d42;
+                font-size: 1rem;
+                color: #f2f2f2;
+            ">
+            <strong>Assistant:</strong><br>{assistant_reply}
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        
     # Split prompt from modifiers using double line break
-    base, *modifiers = tuned_prompt.split("\n\n", 1)
+    #base, *modifiers = tuned_prompt.split("\n\n", 1)
 
     # We've already displayed `base` in the styled bubble.
     # Now just show the rest in the assistant's block.
-    if modifiers:
-        st.chat_message("assistant").write(modifiers[0])
+    # if modifiers:
+    #     st.chat_message("assistant").write(modifiers[0])
 
     if external_mode:
     # Apply same public-safe gating logic for explanation
@@ -163,7 +208,7 @@ if st.button("✨ Generate", disabled=generate_disabled):
         if filtered_traits:  # Prevents empty explanation
             st.markdown("---")  # Visual break
             st.caption("🧬 Trait influence breakdown")
-            explanation = build_trait_explanation(filtered_traits)
-            st.markdown(f"<div style='margin-top: 10px; font-style: italic;'>{explanation}</div>", unsafe_allow_html=True)
+            #explanation = build_trait_explanation(filtered_traits)
+            #st.markdown(f"<div style='margin-top: 10px; font-style: italic;'>{explanation}</div>", unsafe_allow_html=True)
 
     

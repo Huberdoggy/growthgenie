@@ -38,32 +38,23 @@ persona_metadata = {
 # -----------------------------------------------------------------------------------
 # HEADER
 with st.container():
-    st.markdown("<div class='header-block'>", unsafe_allow_html=True)
     st.title("GrowthGenie")
-    
-    # Load and display genie header image
     genie_header_path = images_dir / "genie_header.png"
     if genie_header_path.exists():
         genie_img = Image.open(genie_header_path)
         st.image(genie_img, use_container_width=False, width=300)
-
     st.caption("Shape the voice of your AI with personality traits. No prompt engineering required.")
-    st.markdown("</div>", unsafe_allow_html=True)
 
 # PROMPT ENTRY
 with st.container():
-    st.markdown("<div class='prompt-block'>", unsafe_allow_html=True)
-    user_prompt = st.text_area("Enter your base prompt:", value="Explain how LLMs generate human-like text.")
-    st.markdown("</div>", unsafe_allow_html=True)
+    st.text_area("Enter your base prompt:", value="Explain how LLMs generate human-like text.", key="user_prompt")
 
 # PERSONA
 with st.container():
-    st.markdown("<div class='persona-block'>", unsafe_allow_html=True)
-    persona_id = st.selectbox("Choose a persona:", options=["Kyle", "Renae"])
+    persona_id = st.selectbox("Choose a persona:", options=["Kyle", "Renae"], key="persona_picker")
     meta = persona_metadata.get(persona_id)
     if meta:
-        st.markdown(f"{meta['bio']}", unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+        st.markdown(f"**About this persona:** {meta['bio']}")
 
 # SLIDERS & PRESETS
 all_traits = ["witty", "curious", "empathetic", "analytical", "direct", "imaginative"]
@@ -79,7 +70,7 @@ PRESETS = {
 safe_presets = ["The Conversational Researcher"] if external_mode else list(PRESETS.keys())
 
 st.subheader("Guided Mode Presets")
-if st.button("Reset Traits"):
+if st.button("Reset Traits", key="reset_traits"):
     st.session_state["selected_preset"] = "None"
     for t in all_traits:
         st.session_state[t] = 0
@@ -91,16 +82,14 @@ if selected_preset != "None":
     for t, v in PRESETS[selected_preset].items():
         st.session_state[t] = int(v * 10)
 
-# --- Sliders ---
+# TRAIT SLIDERS
 with st.container():
-    st.markdown("<div class='trait-sliders'>", unsafe_allow_html=True)
     st.subheader("Trait Tuning (0–10)")
     trait_inputs = {}
     for trait in all_traits:
         if external_mode and trait not in PUBLIC_SAFE_TRAITS:
             continue
         trait_inputs[trait] = st.slider(trait.title(), 0, 10, 0, key=trait)
-    st.markdown("</div>", unsafe_allow_html=True)
 
 # --- Normalization & Generation ---
 normalized_traits = {t: v / 10 for t, v in trait_inputs.items()}
@@ -109,9 +98,11 @@ if generate_disabled:
     st.caption("⚠️ Limit: Please select no more than 3 traits per persona.")
 
 # --- GENERATE ---
-if st.button("Generate", disabled=generate_disabled):
+if st.button("Generate", disabled=generate_disabled, key="generate_button"):
     persona = load_persona(persona_id)
     traits_to_use = normalized_traits if any(normalized_traits.values()) else None
+
+    user_prompt = st.session_state.get("user_prompt", "")
 
     user_prompt, system_prompt = generate_prompt(
         user_prompt, persona_id,
@@ -121,8 +112,7 @@ if st.button("Generate", disabled=generate_disabled):
 
     st.markdown("#### GrowthGenie Output")
 
-    # Path string to genie avatar image
-    avatar_url = "images/genie_avatar.png"  # Must be relative to the Streamlit entry point
+    avatar_url = "images/genie_avatar.png"
 
     with st.chat_message("assistant", avatar=avatar_url):
         client = OpenAI()
@@ -136,8 +126,8 @@ if st.button("Generate", disabled=generate_disabled):
         )
         assistant_reply = response.choices[0].message.content
 
-        st.markdown(f"<div class='output-bubble'>You: {user_prompt}</div>", unsafe_allow_html=True)
-        st.markdown(f"<div class='output-bubble assistant'>Assistant: {assistant_reply}</div>", unsafe_allow_html=True)
+        st.markdown(f"**You:** {user_prompt}")
+        st.markdown(f"**Assistant:** {assistant_reply}")
 
         top_traits = {
             trait: weight
@@ -148,5 +138,5 @@ if st.button("Generate", disabled=generate_disabled):
         if top_traits:
             names = list(top_traits.keys())
             readable = ", ".join(names[:-1]) + " and " + names[-1] if len(names) > 1 else names[0]
-            st.markdown(f"<div class='trait-summary'>Reflecting traits: {readable}.</div>", unsafe_allow_html=True)
+            st.markdown(f"_Reflecting traits: {readable}._")
 

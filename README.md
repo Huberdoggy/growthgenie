@@ -8,13 +8,11 @@
 
 ### 📁 Project Structure
 
-This repo uses a modular layout — all code and documentation live in the [`/growthgenie`](./growthgenie/) directory to maintain project hygiene and prepare for future extensions (e.g. `/tests`, `/docs`, `/ui`).
+This repo uses a modular layout — Python code and documentation live in the [`/growthgenie`](./growthgenie/) directory to maintain project hygiene and prepare for future extensions (e.g. `/tests`, `/docs`).
 
 ---
 
 ### 👇 Start Here
-
-Looking for screenshots, a Loom demo, or the full prompt scaffolding?
 
 Head directly into [`growthgenie/`](./growthgenie/), where you'll find:
 
@@ -27,7 +25,8 @@ Head directly into [`growthgenie/`](./growthgenie/), where you'll find:
 ### 🛠️ Dev Notes
 
 This project is built in Replit using Python 3.11 and a secure `.env` pattern.  
-`.gitignore`, `requirements.txt`, and `.replit` are managed from the repo root.
+`.gitignore`, `requirements.txt`, `config.toml`, and `.replit` are managed from the repo root.  
+Directories containing static files - (i.e [`static/`](./static/) and [`images/`](./images/)) live at the root as well.
 
 ---
 

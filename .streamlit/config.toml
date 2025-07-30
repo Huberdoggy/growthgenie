@@ -1,0 +1,8 @@
+[theme]
+base = "dark"
+primaryColor = "#007acc"  # A blue shade, neutral between modes
+backgroundColor = "#0f0f0f"  # Main canvas (true black with a hint of warmth)
+secondaryBackgroundColor = "#1c1c1c"
+textColor = "#f0f0f0"  # Off-white for comfort
+borderColor = "#3d3d42"
+font = "sans serif"

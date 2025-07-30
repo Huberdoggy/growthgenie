@@ -1,89 +1,49 @@
-body, .stApp {
-  background-color: #f7f9fc;
-  color: #222;
-}
+/* Light Mode Overrides */
 
-.prompt-block,
-.persona-block,
-.trait-sliders,
-.output-section {
+.stApp {
   background-color: #ffffff;
-  border: 1px solid #ccc;
+  color: #111111;
+  font-family: "Segoe UI", sans-serif;
 }
 
-.output-bubble {
-  background-color: #f0f4f8;
+.stButton > button {
+  background-color: #007acc;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+.stButton > button:hover {
+  background-color: #289eff;
+}
+
+.stSlider > div[data-baseweb="slider"] {
+  padding: 10px 0;
+}
+
+.stSlider .css-1r6slb0 {
+  background-color: #007acc;
+}
+
+.stSelectbox label, .stTextArea label {
+  font-weight: 500;
+  color: #333333;
+}
+
+.stCaption, .stMarkdown p {
+  color: #444444;
+}
+
+.stChatMessage p {
+  background-color: #f0f4fa;
+  color: #111111;
+  padding: 0.75rem 1rem;
   border-left: 4px solid #007acc;
+  border-radius: 6px;
+  margin-bottom: 1rem;
 }
 
-.trait-summary {
-  background-color: #eef2f5;
-  border-left-color: #007acc;
-}
 
-/* ================================
-   Universal Styling Base
-   ================================ */
-body, .stApp {
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-    font-size: 16px;
-}
 
-.output-bubble {
-    padding: 14px 18px;
-    border-radius: 12px;
-    margin: 12px 0;
-    font-style: italic;
-    max-width: 90%;
-    word-wrap: break-word;
-}
-
-.trait-summary {
-    margin-top: 10px;
-    padding: 10px 16px;
-    border-left: 5px solid #aaa;
-    border-radius: 6px;
-    font-size: 14px;
-    font-style: italic;
-    max-width: 85%;
-}
-
-.header-block {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.prompt-block,
-.persona-block,
-.trait-sliders,
-.output-section {
-    margin-top: 24px;
-    margin-bottom: 24px;
-    padding: 16px;
-    border-radius: 10px;
-    transition: background-color 0.3s ease-in-out;
-}
-
-/* Genie header image wrapper (optional if customizing) */
-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-/* === Assistant Avatar (inline) === */
-/* .assistant-avatar {
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  object-fit: cover;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  margin-right: 12px;
-} */

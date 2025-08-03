@@ -18,6 +18,7 @@ GrowthGenie is a personality-powered prompt calibration tool designed for AI sol
 4. To launch the web interface, run:
    ```bash
    streamlit run demo_ui.py
+*OPTIONAL:* Include argument *--dry* for simulating responses  
 *(If using Replit, click the green Run button.)*
 
 This is a layered build. See commit notes or comments for each phase.

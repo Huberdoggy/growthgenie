@@ -1,7 +1,8 @@
 #from settings import THRESHOLD, PUBLIC_SAFE_TRAITS
 
 """
-THIS MODULE IS NOT USED IN THE CURRENT VERSION OF THE APP
+THIS MODULE IS ONLY USED FOR DRY RUN LOGIC IN THE CURRENT VERSION OF THE APP
+Useful for testing and debugging - (avoiding API credit expenditure)
 Kept for reference and potential future use.
 
 This module applies trait-based transformations to a base prompt.
@@ -17,6 +18,14 @@ Each trait acts as a modular filter, layered in order of descending intensity.
 #     "direct": lambda: _add_direct_summary(),
 #     "imaginative": lambda: _spark_imagination()
 # }
+
+def simulate_response(user_prompt: str, system_prompt: str) -> str:
+    return f"(Simulated response to: {user_prompt})"
+
+# def simulate_response(user_prompt: str, traits: dict) -> str:
+#     traits_applied = ", ".join([t for t, v in traits.items() if v >= THRESHOLD]) or "neutral"
+#     return f"(Simulated response in {traits_applied} style): {user_prompt[::-1]}"
+
 
 # Traits that modify the full prompt directly
 # For now, removing all references of 'precise', as it serves little purpose

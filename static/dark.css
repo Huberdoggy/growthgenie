@@ -19,6 +19,16 @@
   background-color: #289eff;
 }
 
+.st-key-reset_traits .stButton button:hover,
+.st-key-reset_traits .stButton button:visited,
+.st-key-reset_traits .stButton button:focus,
+.st-key-generate_button .stButton button:hover,
+.st-key-generate_button .stButton button:visited,
+.st-key-generate_button .stButton button:focus
+{
+  color: white;
+}
+
 .stSlider > div[data-baseweb="slider"] {
   padding: 10px 0;
 }
@@ -36,12 +46,35 @@
   color: #cccccc;
 }
 
+
+/* Global override using working Streamlit parent */
 .stChatMessage p {
+  background-color: #1c1f26;
+  color: #f2f2f2;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid #3c3f46;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+/* Alternating bubble shade */
+.stChatMessage p:nth-of-type(even) {
+  background-color: #2a2e36;
+}
+
+/* Trait summary styling */
+.stChatMessage p:last-of-type {
+  border-left: 4px solid #007acc;
+  background-color: #1a1a1a;
+  font-style: italic;
+}
+
+/* .stChatMessage p {
   background-color: #1e2533;
   color: #f1f1f1;
   padding: 0.75rem 1rem;
   border-left: 4px solid #007acc;
   border-radius: 6px;
   margin-bottom: 1rem;
-}
+} */
 

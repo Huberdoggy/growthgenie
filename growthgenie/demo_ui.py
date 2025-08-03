@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from prompt_logic import generate_prompt
 from persona_loader import load_persona
-from settings import THRESHOLD, PUBLIC_SAFE_TRAITS
+from settings import DRY_MODE, THRESHOLD, PUBLIC_SAFE_TRAITS
 from pathlib import Path
 from PIL import Image
 
@@ -115,16 +115,22 @@ if st.button("Generate", disabled=generate_disabled, key="generate_button"):
     avatar_url = "images/genie_avatar.png"
 
     with st.chat_message("assistant", avatar=avatar_url):
-        client = OpenAI()
-        response = client.chat.completions.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ],
-            temperature=0.7
-        )
-        assistant_reply = response.choices[0].message.content
+        if DRY_MODE:
+            print("DRY MODE ACTIVE: Simulating response...") # Sanity check
+            from trait_modifiers import simulate_response
+            assistant_reply = simulate_response(user_prompt, system_prompt)
+        else:
+            client = OpenAI()
+            response = client.chat.completions.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt}
+                ],
+                temperature=0.7
+            )
+            assistant_reply = response.choices[0].message.content
+
 
         st.markdown(f"**You:** {user_prompt}")
         st.markdown(f"**Assistant:** {assistant_reply}")

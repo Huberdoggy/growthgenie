@@ -1,5 +1,6 @@
 entrypoint = "growthgenie/demo_ui.py"
-run = "streamlit run growthgenie/demo_ui.py"
+run = "streamlit run growthgenie/demo_ui.py -- --dry"
+#run = "streamlit run growthgenie/demo_ui.py"
 modules = ["python-3.11"]
 
 [nix]

@@ -19,6 +19,17 @@
   background-color: #289eff;
 }
 
+.stButton > button:disabled {
+  background-color: #464444;
+}
+
+.st-key-toggle_text p,
+.st-key-external_text p,
+.stSlider p
+{
+  color: #111111;
+}
+
 .st-key-reset_traits .stButton button:hover,
 .st-key-reset_traits .stButton button:visited,
 .st-key-reset_traits .stButton button:focus,

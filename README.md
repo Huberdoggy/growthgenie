@@ -2,7 +2,9 @@
 
 **A personality-powered prompt tuning engine** — built to help AI solutions strategists generate calibrated, on-brand outputs using behavioral resonance, not brute force.
 
-> _This project is active. Architecture, logic, and strategy are unfolding in public._
+### 🎥 Watch in Action
+
+<video src="https://github.com/user-attachments/assets/78450b6e-b98e-4330-b104-0086b08b3602"></video>
 
 ---
 

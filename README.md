@@ -36,6 +36,6 @@ Directories containing static files - (i.e [`static/`](./static/) and [`images/`
 
 GrowthGenie is an original work created by [Kyle Huber](https://linkedin.com/in/kyle-james-my-filenames) as part of an ongoing project exploring human-personality-driven prompt tuning.
 
-While this repository is public for transparency, learning, and recruiter visibility, all design logic and behavioral systems are authored by Kyle and remain under active development. Contributions are not currently being accepted.
+While this repository is public for transparency, learning, and recruiter visibility, all design logic and behavioral systems are authored by Kyle. Contributions are not currently being accepted.
 
-Please respect the intellectual ownership of this project. If referencing or forking, attribution is appreciated.
+Please respect the intellectual ownership of this project. If referencing, attribution is appreciated.

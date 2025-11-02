@@ -2,6 +2,9 @@
 
 GrowthGenie is a personality-powered prompt calibration tool designed for AI solutions strategists.
 
+🛑 **This project is no longer being actively maintained.**
+> 📌 *The following documentation remains in place for referential purposes only.*
+
 ## Getting Started
 
 1. Clone repo or open in Replit
